@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DNG Transport Booking</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f1f5f9;
+      color: #333;
+    }
+
+    .header {
+      background: linear-gradient(to right, #1e3c72, #2a5298);
+      padding: 20px;
+      color: white;
+      text-align: center;
+    }
+
+    .logo {
+      max-height: 80px;
+      width: auto;
+      object-fit: contain;
+    }
+
+    .container {
+      max-width: 680px;
+      margin: 2rem auto;
+      background: white;
+      border-radius: 12px;
+      padding: 2rem;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+    }
+
+    h2 {
+      text-align: center;
+      color: #1e3c72;
+      margin-bottom: 1.5rem;
+    }
+
+    .form-group {
+      margin-bottom: 1.2rem;
+    }
+
+    label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1px solid #d1d5db;
+      border-radius: 8px;
+      background-color: #f9fbff;
+    }
+
+    .bus-type-container {
+      display: flex;
+      gap: 1rem;
+      margin-top: 0.5rem;
+    }
+
+    .bus-type-option {
+      flex: 1;
+      border: 2px solid #d1d5db;
+      border-radius: 10px;
+      padding: 16px;
+      text-align: center;
+      cursor: pointer;
+      background-color: #fff;
+      transition: all 0.2s ease;
+    }
+
+    .bus-type-option.selected {
+      border-color: #1e3c72;
+      background-color: #e3eaf7;
+      font-weight: bold;
+    }
+
+    .bus-type-option input {
+      display: none;
+    }
+
+    .price-display {
+      font-weight: bold;
+      font-size: 1rem;
+      color: #1e3c72;
+      margin-bottom: 1.2rem;
+    }
+
+    .btn-pay {
+      background: #1e3c72;
+      color: white;
+      font-size: 1rem;
+      font-weight: 600;
+      padding: 12px 24px;
+      border: none;
+      border-radius: 999px;
+      cursor: pointer;
+      width: 100%;
+    }
+
+    .btn-pay:hover {
+      background: #2a5298;
+    }
+
+    footer {
+      text-align: center;
+      background: #0d1f3d;
+      color: white;
+      padding: 1.5rem;
+      margin-top: 2rem;
+      font-size: 0.95rem;
+    }
+
+    footer span {
+      display: block;
+      margin-bottom: 4px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <header class="header">
+    <img src="DNG logo.jpg" alt="DNG Logo" class="logo" />
+    <h1>DNG TRANSPORT BROKERAGE</h1>
+    <p>Fast, reliable, and affordable transportation</p>
+  </header>
+
+  <main>
+    <div class="container">
+      <h2>Book Your Trip</h2>
+      <form id="bookingForm">
+        <div class="form-group">
+          <label for="fullName">Full Name *</label>
+          <input type="text" id="fullName" name="fullName" required />
+        </div>
+
+        <div class="form-group">
+          <label for="phone">Phone Number *</label>
+          <input type="tel" id="phone" name="phone" required />
+        </div>
+
+        <div class="form-group">
+          <label for="destination">Destination *</label>
+          <select id="destination" name="destination" required>
+            <option value="">-- Select Destination --</option>
+            <option value="Kumasi" data-price-sprinter="117" data-price-vip="150">Kumasi</option>
+            <option value="Tema" data-price="91">Tema</option>
+            <option value="Ashaiman" data-price="91">Ashaiman</option>
+            <option value="Kasoa" data-price="72">Kasoa</option>
+            <option value="Madina/Adenta" data-price="86">Madina/Adenta</option>
+            <option value="Kaneshie" data-price-sprinter="77" data-price-vip="117">Kaneshie</option>
+            <option value="Koforidua" data-price="152">Koforidua</option>
+            <option value="Akim Oda" data-price="86">Akim Oda</option>
+            <option value="Pokuase/Amasaman" data-price="81">Pokuase/Amasaman</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="pickupPoint">Pickup Point *</label>
+          <select id="pickupPoint" name="pickupPoint" required>
+            <option value="">-- Select Pickup Point --</option>
+            <option value="Old Site Shuttle Terminal">Old Site Shuttle Terminal</option>
+            <option value="New Site Shuttle Terminal">New Site Shuttle Terminal</option>
+            <option value="Science Shuttle Terminal">Science Shuttle Terminal</option>
+            <option value="SRC Hall Shuttle Terminal">SRC Hall Shuttle Terminal</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Bus Type *</label>
+          <div class="bus-type-container">
+            <label class="bus-type-option selected" id="sprinterOption">
+              <input type="radio" name="busType" value="sprinter" checked />
+              Sprinter Bus
+            </label>
+            <label class="bus-type-option" id="vipOption" style="display: none;">
+              <input type="radio" name="busType" value="vip" />
+              VIP Bus
+            </label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="payerName">Payer's Name (shown in MOMO confirmation message)</label>
+          <input type="text" id="payerName" name="payerName" placeholder="Enter Payer's Name" required />
+        </div>
+
+        <div class="price-display" id="price">Price: GHS 0.00</div>
+
+        <button type="submit" class="btn-pay">Book Trip</button>
+      </form>
+    </div>
+  </main>
+
+  <!-- Confirmation Modal -->
+  <div id="confirmOverlay" aria-modal="true" role="dialog">
+    <div class="confirm-card">
+      <div class="confirm-header">
+        <h3 style="margin:0; font-size:1.05rem;" id="bookingRefTitle">Booking Created • Reference</h3>
+      </div>
+      <div class="confirm-body" id="bookingDetails">
+        <!-- Content will be injected dynamically -->
+      </div>
+      <div class="confirm-actions">
+        <button class="btn btn-secondary" id="closeModalBtn">Close</button>
+        <a class="btn btn-whatsapp" id="whatsappLink" target="_blank" rel="noopener">Send payment screenshot on WhatsApp</a>
+        <button class="btn btn-primary" id="copyRefBtn">Copy Reference</button>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="contact">
+      <span>📍 University of Cape Coast</span>
+      <span>🚌 Transiting you back home</span>
+      <span>☎ Call/WhatsApp: 0598106751 / 0595223640 / 0246962314</span>
+    </div>
+    <p>© 2025 DNG TRANSPORT BROKERAGE. All rights reserved.</p>
+  </footer>
+
+  <script>
+    // Initialize after DOM loads
+    document.addEventListener('DOMContentLoaded', () => {
+      // Ensure modal is hidden on page load
+      const modal = document.getElementById('confirmOverlay');
+      if (modal) modal.style.display = 'none';
+      
+      // Close modal function
+      function closeModal() {
+        if (modal) modal.style.display = 'none';
+        document.body.style.overflow = '';
+      }
+
+      // Close modal button
+      const closeBtn = document.getElementById('closeModalBtn');
+      if (closeBtn) {
+        closeBtn.addEventListener('click', closeModal);
+      }
+
+      // Copy reference button
+      const copyRefBtn = document.getElementById('copyRefBtn');
+      if (copyRefBtn) {
+        copyRefBtn.addEventListener('click', () => {
+          const ref = document.getElementById('bookingRefTitle').textContent.split('•')[1]?.trim();
+          if (ref) {
+            navigator.clipboard.writeText(ref);
+            alert('Reference copied!');
+          }
+        });
+      }
+    });
+  </script>
+
+  <script src="script.js"></script>
+</body>
+</html>

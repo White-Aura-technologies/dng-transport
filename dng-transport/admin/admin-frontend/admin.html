@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>DNG Transport — Admin</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="./favicon.svg">
+  <link rel="stylesheet" href="./admin_styles.css">
+</head>
+<body>
+  <header class="app-header">
+    <div class="brand">
+      <div class="logo">DNG</div>
+      <div>
+        <h1>Admin Dashboard</h1>
+        <p>Bookings overview, live from Cloudzy MySQL</p>
+      </div>
+    </div>
+    <button id="exportCsv" class="btn secondary">Export CSV</button>
+  </header>
+
+  <main class="container">
+    <section class="toolbar">
+      <div class="search-group">
+        <input type="text" id="search" placeholder="Search name, phone, booking #, payer">
+      </div>
+      <div class="filters">
+        <select id="destination">
+          <option value="">All destinations</option>
+        </select>
+        <select id="status">
+          <option value="">All status</option>
+          <option>Pending</option>
+          <option>Paid</option>
+          <option>Confirmed</option>
+          <option>Cancelled</option>
+        </select>
+        <select id="limit">
+          <option value="20">20 / page</option>
+          <option value="50">50 / page</option>
+          <option value="100">100 / page</option>
+        </select>
+        <select id="sort">
+          <option value="created_at:desc">Newest</option>
+          <option value="created_at:asc">Oldest</option>
+          <option value="price:desc">Price high→low</option>
+          <option value="price:asc">Price low→high</option>
+          <option value="full_name:asc">Name A→Z</option>
+          <option value="full_name:desc">Name Z→A</option>
+        </select>
+        <button id="reset" class="btn ghost">Reset</button>
+      </div>
+    </section>
+
+    <section class="table-wrap">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Time</th>
+            <th>Booking #</th>
+            <th>Passenger</th>
+            <th>Phone</th>
+            <th>Payer</th>
+            <th>Route</th>
+            <th>Bus</th>
+            <th class="num">Price</th>
+            <th>Status</th>
+            <th class="actions">Actions</th>
+          </tr>
+        </thead>
+        <tbody id="tbody">
+          <tr><td colspan="10" class="muted">Loading…</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="pagination">
+      <button id="prev" class="btn ghost">Prev</button>
+      <span id="pageInfo" class="muted"></span>
+      <button id="next" class="btn ghost">Next</button>
+    </section>
+  </main>
+
+  <div id="toast" class="toast"></div>
+
+  <script src="./admin.js"></script>
+</body>
+</html>

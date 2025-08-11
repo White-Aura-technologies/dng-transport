@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: dng-admin
+    env: node
+    plan: free
+    build:
+      cwd: .
+      buildCommand: npm ci && npm run build
+    startCommand: npm run preview
+    envVars:
+      - key: NODE_VERSION
+        value: 22.16.0

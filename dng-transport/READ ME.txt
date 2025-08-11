@@ -1,0 +1,61 @@
+# Production .env  
+
+Copy this file to `.env` on your production server and replace each placeholder with your real credentials.
+
+
+
+```env
+
+# Node environment
+
+NODE_ENV=production
+
+
+
+# Server configuration
+
+PORT=3000
+
+BASE_URL=https://api.dngtransport.com
+
+CLIENT_URL=https://app.dngtransport.com
+
+ADMIN_URL=https://admin.dngtransport.com
+
+
+
+# Database configuration
+
+DB_HOST=localhost
+
+DB_PORT=3306
+
+DB_USER=root
+
+DB_PASSWORD=Sterling3310...
+
+DB_NAME=dng_transport
+
+
+
+# Paystack keys
+
+PAYSTACK_PUBLIC_KEY=pk_live_5a218ea23d695d8907e3fd65a6a540a9778d4b22
+
+PAYSTACK_SECRET_KEY=sk_live_dd5a296acf7407afc51338235997fe051649f9cd
+
+
+
+# JWT settings
+
+ADMIN_JWT_SECRET=DENOBLEGOVERNOR
+
+JWT_EXPIRES_IN=1h
+
+
+
+# Logging level (optional)
+
+LOG_LEVEL=info
+
+```
